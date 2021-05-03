@@ -1,4 +1,4 @@
-import axios, { AxiosError } from "axios";
+import { AxiosError } from "axios";
 
 import React, { useState } from "react";
 import "./MainView.css";
@@ -197,7 +197,9 @@ function MainView() {
               <label className="success-text">Token received:</label>
               <div className="json success">
                 {tokenResponse.id_token ?? "ERROR: id_token not in response"}
-              <button onClick={(_e) => {updateClipboard(tokenResponse.id_token)}}>
+              <button onClick={(e) => {
+                e.preventDefault()
+                updateClipboard(tokenResponse.id_token)}}>
                 Copy Token
               </button>
               </div>
