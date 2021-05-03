@@ -1,6 +1,6 @@
 import { app, BrowserWindow, ipcMain } from "electron";
 import axios from "axios";
-import { otp_url, otp_request_payload } from "./api";
+import { otp_url, otp_request_payload, token_request_payload, token_url } from "./api";
 
 declare const MAIN_WINDOW_WEBPACK_ENTRY: any;
 
@@ -21,8 +21,8 @@ const createWindow = (): void => {
     webPreferences: {
       nodeIntegration: true,
       contextIsolation: false,
-      enableRemoteModule: true,
-      preload: MAIN_WINDOW_PRELOAD_WEBPACK_ENTRY
+      // enableRemoteModule: true,
+      //preload: MAIN_WINDOW_PRELOAD_WEBPACK_ENTRY
     },
   });
 
@@ -65,6 +65,28 @@ ipcMain.handle("otp", async (event, ...args) => {
   try {
     const res = await axios.post(otp_url, otp_request_payload(args[0].email));
     console.log("main: otp result", res);
+    return {
+      data: res.data,
+      error: null,
+    };
+  } catch (err) {
+    if (axios.isAxiosError(err)) {
+      return {
+        data: null,
+        error: err,
+      };
+    } else {
+      console.warn(err);
+    }
+  }
+});
+
+
+ipcMain.handle("token", async (event, ...args) => {
+  console.log("main: token", event, args);
+  try {
+    const res = await axios.post(token_url, token_request_payload(args[0].otp, args[0].email));
+    console.log("main: token result", res);
     return {
       data: res.data,
       error: null,

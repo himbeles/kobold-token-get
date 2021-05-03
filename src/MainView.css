@@ -3,12 +3,13 @@
   margin: 20px
 }
 
-#emailAddress:invalid {
+.emailAddress:invalid {
   color: brown;
 }
 
 .json {
   white-space: pre-wrap;
+  word-wrap: break-word;
   font-family: monospace;
   background-color:rgb(176, 222, 203);
   text-align: left;
@@ -32,12 +33,12 @@ label {
   margin-top: 10px;
 }
 
-.success {
+.success-text {
   color: rgb(137, 187, 72);
   font-weight: bold;
 }
 
-.error {
+.error-text {
   color: rgb(187, 72, 87);
   font-weight: bold;
 }
