@@ -107,7 +107,7 @@ function MainView() {
         <input type="submit" value="Request OTP email from Vorwerk" />
 
         <div className="otpResponse">
-          {otpLoading ?? <progress />}
+          {otpLoading && <progress />}
           {otpResponse && (
             <div>
               <label>
@@ -183,7 +183,7 @@ function MainView() {
         <input type="submit" value="Request Token" />
 
         <div className="tokenResponse">
-          {tokenLoading ?? <progress />}
+          {tokenLoading && <progress />}
           {tokenResponse && (
             <div>
               <label className="success-text">Token received:</label>
