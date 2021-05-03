@@ -1,0 +1,30 @@
+.MainView {
+  text-align: left;
+  margin: 20px
+}
+
+#emailAddress:invalid {
+  color: brown;
+}
+
+.json {
+  white-space: pre-wrap;
+  font-family: monospace;
+  background-color:rgb(176, 222, 203);
+  text-align: left;
+  padding: 10px;
+  margin-block: 10px;
+}
+
+.json.error {
+  background-color:rgb(255, 177, 125);
+}
+
+
+label {
+  padding-top: 10px;
+}
+
+.otpResponse {
+  margin-top: 10px;
+}
