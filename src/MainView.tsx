@@ -16,6 +16,14 @@ function format(o: any): string {
   return JSON.stringify(o, null, 1);
 }
 
+function updateClipboard(newClip: string) {
+  navigator.clipboard.writeText(newClip).then(function() {
+    console.log("copied to clipboard")
+  }, function() {
+    console.log("failed copying to clipboard")
+  });
+}
+
 function MainView() {
   const [email, setEmail] = useState("");
   const [otpResponse, setOtpResponse] = useState<any | null>(null);
@@ -189,6 +197,9 @@ function MainView() {
               <label className="success-text">Token received:</label>
               <div className="json success">
                 {tokenResponse.id_token ?? "ERROR: id_token not in response"}
+              <button onClick={(_e) => {updateClipboard(tokenResponse.id_token)}}>
+                Copy Token
+              </button>
               </div>
               <label>Server json response was </label>
               <div className="json neutral">{format(tokenResponse)}</div>
