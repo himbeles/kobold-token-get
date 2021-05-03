@@ -220,7 +220,7 @@
   dependencies:
     "@electron-forge/shared-types" "6.0.0-beta.54"
 
-"@electron-forge/plugin-webpack@6.0.0-beta.54":
+"@electron-forge/plugin-webpack@^6.0.0-beta.54":
   "integrity" "sha512-OM1g74dT0fQrybaJUTbP5j+ZX8a1b4Pfo48bloPlp3J8cOxBVzaysdc4r3tGuhJGQr984z5MANinpDd/rgPfuQ=="
   "resolved" "https://registry.npmjs.org/@electron-forge/plugin-webpack/-/plugin-webpack-6.0.0-beta.54.tgz"
   "version" "6.0.0-beta.54"

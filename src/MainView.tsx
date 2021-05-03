@@ -2,38 +2,34 @@ import axios, { AxiosError } from "axios";
 
 import React, { useState } from "react";
 import "./MainView.css";
+import { otp_url, otp_request_payload , OtpPayload} from "./api"
+import { ipcRenderer } from 'electron'
+//const ipcRenderer = window.icpRenderer
 
-const otp_url = "https://mykobold.eu.auth0.com/passwordless/start";
-function otp_request_payload(email: string): string {
-  return `{
-  "send": "code",
-  "email": ${email},
-  "client_id": "KY4YbVAvtgB7lp8vIbWQ7zLk3hssZlhR",
-  "connection": "email"
-}`;
+function format(o: any) : string {
+  return JSON.stringify(o, null, 1)
 }
 
 function MainView() {
   const [email, setEmail] = useState("");
-  const [otpResponse, setOtpResponse] = useState("");
+  const [otpResponse, setOtpResponse] = useState<OtpPayload | null>(null);
   const [otpError, setOtpError] = useState<AxiosError | null>(null);
+  const [otpLoading, setOtpLoading] = useState(false)
 
   // const [otpResponse, setOtpResponse] = useState("");
 
   async function make_otp_request(email: string) {
+    setOtpResponse(null)
+    setOtpError(null)
+    setOtpLoading(true)
     try {
-      const res = await axios.post(otp_url, otp_request_payload(email), {
-        headers: { "Content-Type": "application/json" },
-      });
-      setOtpResponse(res.data);
+        const res = await ipcRenderer.invoke('otp', {email: email})
+        if (res["data"]) { setOtpResponse(res["data"]) }
+        if (res["error"]) { setOtpError(res["error"]) }
     } catch (err) {
-      if (axios.isAxiosError(err)) {
-        setOtpError(err);
-        console.log(err);
-      } else {
-        console.log(err);
-      }
+      console.warn(err);
     }
+    setOtpLoading(false)
   }
 
   return (
@@ -66,25 +62,28 @@ function MainView() {
 
         <div className="otpRequest">
           <label style={{ fontSize: "small" }}>
-            The json request sent to {otp_url}:
+            The json request which will be sent to {otp_url}:
           </label>
           <br />
-          <div className="json">{otp_request_payload(email)}</div>
+          <div className="json neutral">{format(otp_request_payload(email))}</div>
         </div>
 
-        <input type="submit" value="Request email with otp value" />
+        <input type="submit" value="Request OTP email from Vorwerk" />
+
+        
 
         <div className="otpResponse">
+          {otpLoading ?? <progress />}
           {otpResponse && (
             <div>
-              <label>You should have received an email with your OTP. Server json response was </label>
-              <div className="json">{otpResponse}</div>
+              <label><span className="success">You should have received an email with your OTP.</span> Server json response was </label>
+              <div className="json success">{format(otpResponse)}</div>
             </div>
           )}
           {otpError && (
             <div>
-              <label>Response Error</label>
-              <div className="json error">{otpError.message}</div>
+              <label><span className="error">There was an error while sending the OTP request.</span></label>
+              <div className="json error">{otpError && (otpError.message ?? "")}</div>
             </div>
           )}
         </div>

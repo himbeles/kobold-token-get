@@ -19,6 +19,9 @@
 .json.error {
   background-color:rgb(255, 177, 125);
 }
+.json.neutral {
+  background-color:rgb(219, 219, 219);
+}
 
 
 label {
@@ -27,4 +30,14 @@ label {
 
 .otpResponse {
   margin-top: 10px;
+}
+
+.success {
+  color: rgb(137, 187, 72);
+  font-weight: bold;
+}
+
+.error {
+  color: rgb(187, 72, 87);
+  font-weight: bold;
 }
