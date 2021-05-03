@@ -1,7 +1,7 @@
 {
   "name": "kobold-token-get",
   "productName": "kobold-token-get",
-  "version": "1.1.1",
+  "version": "1.1.2",
   "description": "Get Kobold Authentication Tokens",
   "main": ".webpack/main",
   "scripts": {
