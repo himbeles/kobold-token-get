@@ -76,7 +76,7 @@ function MainView() {
 
   return (
     <div className="App">
-      <h2>Get OTP Value</h2>
+      <h2>Get OTP</h2>
       Request a one-time password (OTP) for your Vorwerk Account email. You will
       need the OTP in the next step to request a Token.
       <form
@@ -104,7 +104,7 @@ function MainView() {
 
         <div className="otpRequest">
           <label style={{ fontSize: "small" }}>
-            The json request which will be sent to {otp_url}:
+            This request will be sent to {otp_url}:
           </label>
           <br />
           <div className="json neutral">
@@ -131,7 +131,7 @@ function MainView() {
             <div>
               <label>
                 <span className="error-text">
-                  There was an error while sending the OTP request.
+                  There was an error sending the OTP request.
                 </span>
               </label>
               <div className="json error">
@@ -180,7 +180,7 @@ function MainView() {
 
         <div className="otpRequest">
           <label style={{ fontSize: "small" }}>
-            The json request which will be sent to {token_url}:
+            This request which will be sent to {token_url}:
           </label>
           <br />
           <div className="json neutral">
@@ -211,7 +211,7 @@ function MainView() {
             <div>
               <label>
                 <span className="error-text">
-                  There was an error while sending the Token request.
+                  The token could not be acquired.
                 </span>
               </label>
               <div className="json error">
