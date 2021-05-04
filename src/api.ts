@@ -1,14 +1,7 @@
 export const otp_url = "https://mykobold.eu.auth0.com/passwordless/start";
 export const token_url = "https://mykobold.eu.auth0.com/oauth/token";
 
-export declare interface OtpPayload {
-  send: string;
-  email: string;
-  client_id: string;
-  connection: string;
-}
-
-export function otp_request_payload(email: string): OtpPayload {
+export function otp_request_payload(email: string) {
   return {
     send: "code",
     email: email,
@@ -17,25 +10,7 @@ export function otp_request_payload(email: string): OtpPayload {
   };
 }
 
-export declare interface TokenPayload {
-  prompt: string;
-  grant_type: string;
-  scope: string;
-  locale: string;
-  otp: string;
-  source: string;
-  platform: string;
-  audience: string;
-  username: string;
-  client_id: string;
-  realm: string;
-  country_code: string;
-}
-
-export function token_request_payload(
-  otp: string,
-  email: string
-): TokenPayload {
+export function token_request_payload(otp: string, email: string) {
   return {
     prompt: "login",
     grant_type: "http://auth0.com/oauth/grant-type/passwordless/otp",
