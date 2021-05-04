@@ -1,6 +1,11 @@
 import { app, BrowserWindow, ipcMain } from "electron";
 import axios from "axios";
-import { otp_url, otp_request_payload, token_request_payload, token_url } from "./api";
+import {
+  otp_url,
+  otp_request_payload,
+  token_request_payload,
+  token_url,
+} from "./api";
 
 declare const MAIN_WINDOW_WEBPACK_ENTRY: any;
 
@@ -81,11 +86,13 @@ ipcMain.handle("otp", async (event, ...args) => {
   }
 });
 
-
 ipcMain.handle("token", async (event, ...args) => {
   console.log("main: token", event, args);
   try {
-    const res = await axios.post(token_url, token_request_payload(args[0].otp, args[0].email));
+    const res = await axios.post(
+      token_url,
+      token_request_payload(args[0].otp, args[0].email)
+    );
     console.log("main: token result", res);
     return {
       data: res.data,
