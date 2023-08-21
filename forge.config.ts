@@ -34,6 +34,18 @@ const config: ForgeConfig = {
       },
     }),
   ],
+  publishers:[
+    {
+      name: "@electron-forge/publisher-github",
+      config: {
+        repository: {
+          owner: "himbeles",
+          name: "kobold-token-get"
+        },
+        draft: false
+      }
+    }
+  ]
 };
 
 export default config;
