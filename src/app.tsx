@@ -1,14 +1,7 @@
-import * as React from 'react';
-import * as ReactDOM from 'react-dom';
+import { createRoot } from 'react-dom/client';
 import MainView from "./MainView"
+import React from 'react';
 
-function render() {
-  ReactDOM.render(
-    <React.StrictMode>
-        <MainView />
-    </React.StrictMode>,
-    document.getElementById('root')
-  )
-}
-
-render();
+const container = document.getElementById('root') as HTMLElement;
+const root = createRoot(container);
+root.render(<MainView />);

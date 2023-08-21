@@ -9,8 +9,6 @@ import {
   token_request_payload,
   TokenResponse,
 } from "./api";
-import { ipcRenderer } from "electron";
-//const ipcRenderer = window.icpRenderer
 
 function format(o: any): string {
   return JSON.stringify(o, null, 1);
@@ -46,7 +44,7 @@ function MainView() {
     setOtpError(null);
     setOtpLoading(true);
     try {
-      const res = await ipcRenderer.invoke("otp", { email: email });
+      const res = await window.electron.otp({ email: email });
       if (res["data"]) {
         setOtpResponse(res["data"]);
       }
@@ -64,7 +62,7 @@ function MainView() {
     setTokenError(null);
     setTokenLoading(true);
     try {
-      const res = await ipcRenderer.invoke("token", { otp: otp, email: email });
+      const res = await window.electron.token({otp: otp, email: email });
       if (res["data"]) {
         setTokenResponse(res["data"]);
       }
